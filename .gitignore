@@ -12,3 +12,4 @@
 .env*.local
 /next-env.d.ts
 /typescript
+/tsconfig.tsbuildinfo
