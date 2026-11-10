@@ -74,14 +74,6 @@ const FEATURE_ICONS = [Zap, BrainCircuit, Timer, PenLine, Bot, FileUp];
 
 export function Features() {
   const { t } = useLang();
-  const icons = [
-    "M13 2 L3 14 H12 L11 22 L21 10 H12 Z", // éclair
-    "M12 2 a7 7 0 0 1 7 7 c0 3-2 5-3 6 v3 h-8 v-3 c-1-1-3-3-3-6 a7 7 0 0 1 7-7 Z", // cerveau
-    "M12 22 a10 10 0 1 1 0-20 a10 10 0 0 1 0 20 Z M12 6 v6 l4 2", // minuteur
-    "M12 19 l7-7 a2.1 2.1 0 0 0-3-3 l-7 7 v3 h3 Z M5 21 h14", // crayon
-    "M12 2 a4 4 0 0 1 4 4 v1 h1 a3 3 0 0 1 3 3 v7 a3 3 0 0 1-3 3 H7 a3 3 0 0 1-3-3 v-7 a3 3 0 0 1 3-3 h1 V6 a4 4 0 0 1 4-4 Z", // robot
-    "M14 2 H6 a2 2 0 0 0-2 2 v16 a2 2 0 0 0 2 2 h12 a2 2 0 0 0 2-2 V8 Z M14 2 v6 h6", // fichier
-  ];
 
   return (
     <section id="fonctionnalites" className="relative px-4 py-24 sm:px-6">
@@ -96,7 +88,9 @@ export function Features() {
         </motion.div>
 
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {t.feat.items.map((f, i) => (
+          {t.feat.items.map((f, i) => {
+            const Icon = FEATURE_ICONS[i % FEATURE_ICONS.length];
+            return (
             <motion.div
               key={f.t}
               {...fadeUp}
@@ -108,14 +102,13 @@ export function Features() {
                 style={{ background: "radial-gradient(circle, rgba(139,92,246,0.35), transparent 70%)" }}
               />
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-600/80 to-cyan-500/80 shadow-[0_0_22px_rgba(124,58,237,0.4)]">
-                <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                  <path d={FEATURE_ICONS[i % FEATURE_ICONS.length]} />
-                </svg>
+                <Icon className="h-6 w-6 text-white" aria-hidden />
               </div>
               <h3 className="mt-5 text-lg font-extrabold text-white">{f.t}</h3>
               <p className="mt-2 text-sm leading-relaxed text-white/55">{f.d}</p>
             </motion.div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
